@@ -8,6 +8,7 @@ export const Container = styled.div`
     padding: 5px;
     background-color: #363535;
     color: #fff;
+    min-height: 250px;
 
     @media(max-width: 800px) {
         flex-direction: column;

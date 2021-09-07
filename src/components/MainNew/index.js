@@ -1,18 +1,29 @@
 import * as S from './styled';
-import image from '../../assets/001.jpg'
+import { useSelector } from 'react-redux';
 
-const MainNew = () => {
+const MainNew = () => {    
+    const { mainNew } = useSelector((state) => state.nytInfo);     
+
+    const title = mainNew ? mainNew.headline.main : '';
+    const content = mainNew ? mainNew.lead_paragraph : '';
+    const url = mainNew ? mainNew.web_url : '';
+    let img = ''
+
+    if(mainNew){        
+        img = `https://www.nytimes.com/${mainNew.multimedia[0].url}`
+    }
+    
 
     return(
         <S.Container>
-            <S.Image src={image}/>
+            <S.Image src={img}/>
             <S.TextContainer>
-                <S.Title>Lorem ipsum dolor</S.Title>
+                <S.Title>{title}</S.Title>
                 <S.Date>25 01 2021</S.Date>
                 <S.Content>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat erat, ullamcorper quis lorem vel, facilisis pretium erat. Phasellus scelerisque vestibulum ante eu varius. Nullam a purus lorem. Mauris sit amet erat at metus consectetur pretium. Duis tristique nunc laoreet massa dapibus, a volutpat eros molestie. Phasellus non ultricies massa, quis cursus turpis. Nulla sed risus quam. Mauris sollicitudin, neque ac efficitur semper, ligula sapien gravida tortor, at posuere nisi arcu vitae quam. Nulla erat nunc, tempor at aliquam vel, aliquam non sapien. Nam interdum scelerisque vestibulum. Curabitur facilisis porttitor orci ultrices vehicula. Curabitur vulputate fermentum ex, gravida malesuada elit pulvinar nec. Nullam in est magna. Proin venenatis velit justo, non rhoncus metus ultrices vel. Quisque sollicitudin tortor quis semper venenatis. 
+                    {content}
                 </S.Content>
-                <S.More>Click To Read more</S.More>
+                <S.More href={url}>Click To Read more</S.More>
             </S.TextContainer>
         </S.Container>
     )
